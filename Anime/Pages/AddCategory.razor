@@ -1,0 +1,33 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState state;
+@inject NavigationManager nav;
+
+@page "/addcategory"
+
+@if (@state.UserRoot != false)
+{
+    <label for="category"><b>Название</b></label>
+    <input @bind-value="name"   class="text-field__input" type="text" placeholder="Введите название категории" name="category" required>
+
+    <button @onclick="AddCat" class="button">Подтвердить</button>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+@code 
+{
+    private string name = string.Empty;
+
+    private void AddCat()
+    {
+        DBservice.AddCategory(name);
+        DBservice.GetDataFromDB();
+        name = string.Empty;
+    }
+
+}

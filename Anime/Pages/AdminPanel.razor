@@ -1,0 +1,32 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+@inject AppState state
+
+@page "/adminpanel"
+
+
+
+
+@if (@state.UserRoot != false)
+{
+    <NavLink href="/addProduct">
+        <button class="button">Добавить товар</button>
+    </NavLink>
+    <NavLink href="/deleteProduct">
+        <button class="button">Удалить товар</button>
+    </NavLink>
+    <NavLink href="/addAdmin">
+        <button class="button">Добавить администратора</button>
+    </NavLink>
+    <NavLink href="/editProduct">
+        <button class="button">Редактировать товар</button>
+    </NavLink>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+@code{
+        
+    }

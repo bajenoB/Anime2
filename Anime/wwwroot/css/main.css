@@ -1,0 +1,221 @@
+﻿body {
+    background-color: #A4F2FE
+}
+
+.mainheader {
+   /* background-color: rgb(255, 255, 255);*/
+    background-color: #B67FFF;
+    width: 100%;
+}
+
+.headercontainer {
+    width: 80%;
+    padding: 20px;
+    margin: auto;
+    
+}
+
+/* установим отступ 1rem от нижнего края элемента */
+.text-field {
+    margin-bottom: 1rem;
+}
+/* стили для label */
+.text-field__label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+/* стили для input */
+.text-field__input {
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.but {
+    font-family: Consolas;
+}
+
+.atuin-btn {
+    display: inline-flex;
+    margin: 15px;
+    text-decoration: none;
+    position: relative;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 20px 30px;
+    color: #007509;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Consolas;
+    background: #59B98C;
+    cursor: pointer;
+    border: 2px solid #BFE2FF;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 45px;
+}
+
+    .atuin-btn:hover,
+    .atuin-btn:active,
+    .atuin-btn:focus {
+        color: #FFF;
+    }
+
+    .atuin-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: -50px;
+        bottom: 0;
+        left: 0;
+        border-right: 60px solid transparent;
+        border-top: 60px solid #2D6B9F;
+        transition: transform 0.5s;
+        transform: translateX(-100%);
+        z-index: -1;
+    }
+
+    .atuin-btn:hover:before,
+    .atuin-btn:active:before,
+    .atuin-btn:focus:before {
+        transform: translateX(0);
+    }
+
+.cart-button {
+    background-color: #68c15a;
+    color: #E5ADFF;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    padding: 12px;
+    width: auto;
+    margin: 10px 10px 10px 10px;
+    transition: 0.3s ease;
+}
+
+    .cart-button:hover {
+        padding: 15px;
+        background-color: #6ddd5b;
+        transition: 0.3s ease;
+        transform: scale(0.96);
+    }
+
+.admin_panel {
+    margin-left: 5%;
+}
+
+.cart {
+    margin-left: 50%;
+}
+
+.logo {
+    padding-top: 8px;
+    font-family: Consolas;
+    color: #0b2a3d;
+    margin-left: 0.5%;
+    text-decoration: none;
+}
+
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+.product-item {
+    width: 300px;
+    height: 800px;
+    text-align: center;
+    border-bottom: 2px solid #F5F5F5;
+    background: #E5ADFF;
+    font-family: Consolas;
+    transition: .3s ease-in;
+    width: 24%;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+}
+
+    .product-item:hover {
+        border-bottom: 2px solid #00C66A;
+    }
+
+    .product-item img {
+        display: block;
+        width: 100%;
+        height: 70%;
+        
+    }
+
+.product-list {
+    background: #fafafa;
+    padding: 15px 0;
+}
+
+    .product-list h3 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #444444;
+    }
+
+.price {
+    font-size: 16px;
+    color: #004F5B;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.button {
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 12px;
+    background: #AB03B3;
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 28px;
+    transition: .3s ease-in;
+    border-radius: 10px;
+}
+
+.product-item:hover .button {
+    background: #2F67DE;
+}
+
+.main_products_cards {
+    margin-top: 20px;
+    margin-left: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+
+}
+
+.input {
+    margin-left: 82px;
+}

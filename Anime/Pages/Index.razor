@@ -1,0 +1,73 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+@using Microsoft.EntityFrameworkCore;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
+@inject ICartService CartService 
+@inject AppState state
+
+
+@page "/"
+
+<PageTitle>AnimeShmot</PageTitle>
+
+
+
+<div class="main_products_cards">
+    
+    @foreach (var item in DBservice.products)
+    {
+        if (searchQuery == String.Empty || (searchQuery != String.Empty && item.Name.ToLower().Contains(searchQuery.ToLower())))
+        {
+            <div class="product-item">
+                <img src="@item.Image">
+                <div class="product-list">
+                    <h3>@item.Name</h3>
+                    <h4>@item.Description</h4>
+                    <span class="price">@item.Price </span>
+                    @if (@state._userName != "Вход")
+                    {
+                        <a class="button" @onclick="((args)=>AddToCart(item))">Add to card</a>
+                    }
+                    
+
+                   
+                    
+                </div>
+            </div>
+        }
+
+
+    }
+</div>
+
+
+
+    
+
+
+
+
+@code 
+{
+    string searchQuery = String.Empty;
+
+
+    private Cart cart= new Cart();
+
+    private async Task AddToCart(Product item)
+    {
+        var bar = item;
+        cart.Id = bar.Id;
+        cart.Name = bar.Name;
+        cart.Image = bar.Image;
+        cart.Description = bar.Description;
+        cart.Price = bar.Price;
+        cart.Categoryid = bar.Categoryid;
+        await CartService.AddToCart(cart);
+
+    }
+
+
+
+
+}

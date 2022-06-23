@@ -1,0 +1,35 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+
+@inject NavigationManager nav;
+@inject AppState state;
+
+@page "/registration"
+
+
+
+<PageTitle>Registration</PageTitle>
+
+<div class="container but">
+    <label for="uname"><b>Логин</b></label>
+    <input @bind-value="login" type="text" placeholder="Введите логин" name="uname" required>
+    
+
+    <label for="psw"><b>Пароль</b></label>
+    <input @bind-value="password" type="password" placeholder="Введите пароль" name="psw" required>
+
+    <button @onclick="Reg" class="background_but">Зарегистрироваться</button>
+</div>
+
+@code
+{
+    private string login = string.Empty;
+    private string password = string.Empty;
+
+    private void Reg()
+    {
+        
+        DBservice.AddUser(login,password);
+        nav.NavigateTo("/authorisation/");
+    }
+}

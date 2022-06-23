@@ -1,0 +1,55 @@
+﻿@page "/cart"
+@inject ICartService CartService
+@using Anime.Model;
+@using Anime.Data;
+
+ @if (cartItems == null || cartItems.Count <= 0)
+    {
+    <span>You have no items in your cart.</span>
+}
+else
+{
+    
+    <div class="main_products_cards">
+    @foreach (var item in cartItems)
+    {
+        <div class="product-item">
+                <img src="@item.Image">
+                <div class="product-list">
+                    <h3>@item.Name</h3>
+                    <h4>@item.Description</h4>
+                    <span class="price">@item.Price </span>
+                    <a class="button" @onclick="((args)=>DeleteItem(item))">Add to card</a>
+
+                   
+                    
+                </div>
+            </div>
+            
+        }
+    </div>
+}
+
+
+
+@code 
+{
+
+    List<Cart> cartItems = new List<Cart>();
+    bool orderPlaced = false;
+    int allprice;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cartItems = await CartService.GetCartItems();
+    }
+
+    private async Task DeleteItem(Cart item)
+    {
+        await CartService.DeleteItem(item);
+        cartItems = await CartService.GetCartItems();
+    }
+
+    
+
+}

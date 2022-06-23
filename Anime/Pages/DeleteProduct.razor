@@ -1,0 +1,59 @@
+﻿@using Anime.Model;
+@using Anime.Data;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState state;
+@inject NavigationManager nav;
+
+@page "/deleteProduct"
+
+@if (@state.UserRoot != false)
+{
+    <button @onclick="Reg" class="button">Назад</button>
+
+    <div class="main_products_cards">
+        @foreach (var item in DBservice.products)
+        {
+            if (searchQuery == String.Empty || (searchQuery != String.Empty && item.Name.ToLower().Contains(searchQuery.ToLower())))
+            {
+                <div class="product-item">
+                    <img src="@item.Image">
+                    <div class="product-list">
+                        <h3>@item.Name</h3>
+                        <h4>@item.Description</h4>
+                        <span class="price">@item.Price </span>
+
+                        <button class="btn btn-danger" @onclick="@((args)=>removeitem(@item))">Удалить</button>
+                    </div>
+                </div>
+            }
+
+
+        }
+    </div>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+
+@code {
+     int prodeid = -1;
+    string searchQuery = string.Empty;
+    int id;
+     private void removeitem(Product prod)
+    {
+        DBservice.DeleteProduct(prod);
+        DBservice.GetDataFromDB();
+        prodeid = -1;
+    }
+
+    
+
+    private void Reg()
+    {
+        //DBservice.AddUser(login, password);
+        nav.NavigateTo("/adminpanel/");
+    }
+}

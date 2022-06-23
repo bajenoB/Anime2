@@ -1,0 +1,62 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+@inject NavigationManager nav;
+@inject AppState state;
+
+@page "/authorisation"
+
+<PageTitle>Auth</PageTitle>
+
+<div class="container but">
+    <label for="uname"><b>Логин</b></label>
+    <input @bind-value="login" class="text-field__input"type="text" placeholder="Введите логин" name="uname" required>
+    
+
+    <label for="psw"><b>Пароль</b></label>
+    <input @bind-value="password" class="text-field__input" type="password" placeholder="Введите пароль" name="psw" required>
+    <br> <br />
+
+    <button @onclick="Login" class="button">Войти</button>
+    <button @onclick="redirect" class="button">Нет аккаунта? Зарегистрироваться</button>
+    @if (isError)
+    {
+        <span style="color: red">Неправильный логин или пароль</span>
+    }
+</div>
+
+@code {
+
+    private string login = string.Empty;
+    private string password = string.Empty;
+    
+    private bool isError = false;
+
+    private void redirect()
+    {
+        nav.NavigateTo("/registration/");
+    }
+
+    private void Login()
+    {
+        var data = DBservice.authadmin(login, password);
+
+        if (data.Item2 != "Вход")
+        {
+            if (data.Item1)
+            {
+                nav.NavigateTo("/adminpanel/");
+                state.UserRoot = true;
+            }
+            else
+            {
+                nav.NavigateTo("/");
+            }
+            state.UserName = data.Item2;
+            
+        }
+        else
+        {
+            isError = true;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+
+@inject NavigationManager nav;
+@inject AppState state;
+
+@page "/addAdmin"
+
+
+
+@if (@state.UserRoot != false)
+                {
+<PageTitle>AddAdmin</PageTitle>
+
+<div class="container but">
+    <label for="uname"><b>Логин</b></label>
+    <input @bind-value="login"  class="text-field__input" type="text" placeholder="Введите логин" name="uname" required>
+
+    <label for="psw"><b>Пароль</b></label>
+    <input @bind-value="password"  class="text-field__input" type="password" placeholder="Введите пароль" name="psw" required>
+
+    <button @onclick="Reg" class="button">Зарегистрироваться</button>
+    </div>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+@code
+{
+    private string login = string.Empty;
+    private string email = string.Empty;
+    private string password = string.Empty;
+
+    private void Reg()
+    {
+        DBservice.AddAdmin(login,password);
+        nav.NavigateTo("/adminpanel/");
+    }
+}

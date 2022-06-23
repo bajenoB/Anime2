@@ -1,0 +1,80 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+@inject AppState state
+@implements IDisposable
+@inherits LayoutComponentBase
+@inject NavigationManager nav;
+
+<PageTitle>AnimeShop</PageTitle>
+<link href="css/site.css" rel="stylesheet" />
+
+<div>
+    <div class="mainheader">
+        <div class="headercontainer">
+
+            <div>
+                <NavLink style="text-decoration: none" href="/">
+
+                    <h1 class="logo noselect">TolyanchikShop</h1>
+
+                </NavLink>
+            </div>
+            <div class="buttons-container">
+                <NavLink href="/manga">
+                    <button class="atuin-btn">Manga</button>
+                </NavLink>
+                <NavLink href="/figurki">
+                    <button class="atuin-btn">Figure</button>
+                </NavLink>
+                <NavLink href="/poster">
+                    <button class="atuin-btn">Plakat</button>
+                </NavLink>
+                <NavLink href="/dakimakura">
+                    <button class="atuin-btn">Dakimakura</button>
+                </NavLink>
+                @if (@state.UserRoot != false)
+                {
+                    <NavLink href="/adminpanel">
+                        <button class="atuin-btn">AdminPanel</button>
+                    </NavLink>
+                }
+
+                        <div class="auth">
+                        <NavLink href="/authorisation">
+                        <button class="atuin-btn">@state.UserName</button>
+                        </NavLink>
+                        </div>
+                        <div class="cart">
+                    <NavLink href="/cart">
+                        <img src="https://pngimg.com/uploads/shopping_cart/shopping_cart_PNG3.png" width="60" height="60">
+                    </NavLink>
+                </div>
+                    
+                    
+            </div>
+        </div>
+    </div>
+
+
+    <main>
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code
+{
+
+    
+
+    protected async override void OnInitialized()
+    {
+        state.OnChange += StateHasChanged;
+        StateHasChanged();
+    }
+    public void Dispose()
+    {
+        state.OnChange -= StateHasChanged;
+    }
+}
