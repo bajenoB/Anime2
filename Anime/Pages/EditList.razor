@@ -1,0 +1,58 @@
+﻿@using Anime.Model;
+@using Anime.Data;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState state;
+@inject EditService editid;
+@inject NavigationManager nav;
+
+@page "/editList"
+
+@if (@state.UserRoot != false)
+{
+    <button @onclick="Reg" class="button">Назад</button>
+
+    <div class="main_products_cards">
+        @foreach (var item in DBservice.products)
+        {
+            if (searchQuery == String.Empty || (searchQuery != String.Empty && item.Name.ToLower().Contains(searchQuery.ToLower())))
+            {
+                <div class="product-item">
+                    <img src="@item.Image">
+                    <div class="product-list">
+                        <h3>@item.Name</h3>
+                        <h4>@item.Description</h4>
+                        <span class="price">@item.Price </span>
+
+                        <button class="btn btn-danger" @onclick="@((args)=>editItem(@item.Id))">Edit this item</button>
+                    </div>
+                </div>
+            }
+
+
+        }
+    </div>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+@code {
+    int prodeid = -1;
+    string searchQuery = string.Empty;
+    int id;
+    private void editItem(int prod)
+    {
+        editid.id = prod;
+        nav.NavigateTo("/editProduct/");
+    }
+
+    
+
+    private void Reg()
+    {
+        //DBservice.AddUser(login, password);
+        nav.NavigateTo("/adminpanel/");
+    }
+}

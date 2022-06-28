@@ -8,14 +8,7 @@ public static class DBservice
     {
     
     // 1-фигурка 2-манга 3-дакимакура
-    public static void Init_db()
-        {
-            using (DBContext db =new DBContext())
-            {
-                db.SaveChanges();
-            }
-        }
-
+    
         public static void AddProduct(string name, int price, string image,string desc, int categoryid)
         {
             using (DBContext db = new DBContext())

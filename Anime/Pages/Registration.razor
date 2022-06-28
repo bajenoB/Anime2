@@ -31,7 +31,7 @@
     {
         if(Validata.ExistUser(login)!=false&&Validata.SimpleValid(login)!=false&&Validata.SimpleValid(password)!=false&&Validata.SpaceValid(login)!=false&&Validata.SpaceValid(password)!=false&&login.Count()<20&&password.Count()<20)
         {
-             await localStorage.SetItemAsync("client", login);
+            
              DBservice.AddUser(login,password);
              nav.NavigateTo("/authorisation/");
         }
