@@ -1,14 +1,16 @@
 ﻿@using Anime.Data;
 @using Anime.Model;
 @inject AppState state
+@inject NavigationManager nav;
 
 @page "/adminpanel"
 
 
 
 
-@if (@state.UserRoot != false)
+@if (@state.UserRoot !=false)
 {
+   
     <NavLink href="/addProduct">
         <button class="button">Добавить товар</button>
     </NavLink>
@@ -21,10 +23,14 @@
     <NavLink href="/editProduct">
         <button class="button">Редактировать товар</button>
     </NavLink>
+    <NavLink href="/deleteUsers">
+        <button class="button">Удалить пользователей</button>
+    </NavLink>
+    
 }
 else
 {
-    <h1>fuck off </h1>
+    
 }
 
 @code{

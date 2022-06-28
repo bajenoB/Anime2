@@ -1,0 +1,50 @@
+﻿@using Anime.Model;
+@using Anime.Data;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState state;
+@inject NavigationManager nav;
+
+@page "/deleteUsers"
+
+@if (@state.UserRoot != false)
+{
+    
+
+    <div class="main_products_cards">
+        @foreach (var item in DBservice.user)
+        {
+                
+                    <div class="users-item">
+                        <h3>Login @item.Login</h3>
+                        <h4>Admin rights @item.Root</h4>
+                        <button class="btn btn-danger" @onclick="@((args)=>removeitem(@item))">Удалить</button>
+                    </div>
+        }
+    </div>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+@code{
+
+     int prodeid = -1;
+    string searchQuery = string.Empty;
+    int id;
+     private void removeitem(Users prod)
+    {
+        DBservice.DeleteUsers(prod);
+        DBservice.GetDataFromDB();
+        prodeid = -1;
+    }
+
+    
+
+    private void Reg()
+    {
+        //DBservice.AddUser(login, password);
+        nav.NavigateTo("/adminpanel/");
+    }
+}

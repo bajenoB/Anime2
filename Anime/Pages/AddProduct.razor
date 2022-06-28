@@ -12,16 +12,16 @@
     <button @onclick="Reg" class="button">Назад</button>
 
     <label for="price"><b>Цена</b></label>
-    <input @bind-value="price"  class="text-field__input" type="text" placeholder="Введите цену товара" name="price" required>
+    <input @bind-value="price"  class="text-field__input" type="text" placeholder="Введите цену товара" name="price" required minlength="1">
 
     <label for="img"><b>Изображение</b></label>
-    <input @bind-value="img"  class="text-field__input" type="text" placeholder="Введите ссылку на изображение" name="img" required>
+    <input @bind-value="img"  class="text-field__input" type="text" placeholder="Введите ссылку на изображение" name="img" required minlength="1">
 
     <label for="name"><b>Название</b></label>
-    <input @bind-value="name"  class="text-field__input" type="text" placeholder="Введите название товара" name="name" required>
+    <input @bind-value="name"  class="text-field__input" type="text" placeholder="Введите название товара" name="name" required minlength="1">
 
     <label for="name"><b>Описание</b></label>
-    <input @bind-value="description"  class="text-field__input" type="text" placeholder="Введите описание товара" name="name" required>
+    <input @bind-value="description"  class="text-field__input" type="text" placeholder="Введите описание товара" name="name" required minlength="1">
 
     <label for="category"><b>Категория</b></label>
     <input @bind-value="categoryid"  class="text-field__input" type="text" placeholder="Введите ID категории товара" name="category" required>
@@ -43,7 +43,7 @@ else
 
 @code
 {
-    
+
     string message = "Something in your request is empty";
     int category = -1;
 
@@ -56,8 +56,10 @@ else
     //db.Category.FirstOrDefault(x => x.Id == categoryid)
     private void AddCards()
     {
-        if (price != 0 && img != null && name != null && description != null && categoryid != 0&&price!=-0)
+        uint N;
+        if (price != 0 && img != null && name != null && description != null && categoryid != 0&&price>0&&categoryid>0&&Validata.DigitValid(price)!=true&&Validata.DigitValid(categoryid)!=true&&Validata.SimpleValid(name)!=false&&Validata.SimpleValid(description)!=false)
         {
+            
             DBservice.AddProduct(name, price, img, description, categoryid);
             DBservice.GetDataFromDB();
             price = 0; img = string.Empty; name = string.Empty; categoryid = DBservice.category.First().Id;

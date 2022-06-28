@@ -31,7 +31,6 @@ public static class DBservice
 
             }
         }
-
     public static void EditProduct(int id, string name, int price, string image, string desc, int categoryid)
     {
         using (DBContext db = new DBContext())
@@ -43,9 +42,6 @@ public static class DBservice
             d.Description = desc;
             d.Categoryid = categoryid;
             db.SaveChanges();
-
-
-
         }
     }
 
@@ -53,6 +49,7 @@ public static class DBservice
     {
         ids.Add(id);
     }
+
 
 
     public static void DeleteProduct(Product prod)
@@ -65,14 +62,17 @@ public static class DBservice
         }
     }
 
-    public static void DeleteProducts()
+    public static void DeleteUsers(Users prod)
     {
         using (DBContext db = new DBContext())
         {
-            db.Database.ExecuteSqlInterpolated($"TRUNCATE TABLE [Basket]");
-            
+            db.Users.Remove(prod);
+            db.SaveChanges();
+
         }
     }
+
+    
 
     public static void DeleteCat(Categories cat)
     {

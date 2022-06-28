@@ -11,6 +11,9 @@ namespace Anime.Model
         [Range(5, 30, ErrorMessage = "Accommodation invalid (1-255).")]
         public string Name { get; set; } = null!;
 
+
+        [Required]
+        [Range(1, 999999, ErrorMessage = "Accommodation invalid (1-999999).")]
         public int Price { get; set; }
 
         [Required]
@@ -22,6 +25,8 @@ namespace Anime.Model
         public string Description { get; set; }
 
         //[ForeignKey("Categories")]
+
+        
         public int Categoryid { get; set; } 
 
     }

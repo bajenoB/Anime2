@@ -9,11 +9,11 @@
 
 <div class="container but">
     <label for="uname"><b>Логин</b></label>
-    <input @bind-value="login" class="text-field__input"type="text" placeholder="Введите логин" name="uname" required>
+    <input @bind-value="login" class="text-field__input"type="text" placeholder="Введите логин" name="uname" required minlength="5">
     
 
     <label for="psw"><b>Пароль</b></label>
-    <input @bind-value="password" class="text-field__input" type="password" placeholder="Введите пароль" name="psw" required>
+    <input @bind-value="password" class="text-field__input" type="password" placeholder="Введите пароль" name="psw" required minlength="8">
     <br> <br />
 
     <button @onclick="Login" class="button">Войти</button>
@@ -28,7 +28,7 @@
 
     private string login = string.Empty;
     private string password = string.Empty;
-    
+
     private bool isError = false;
 
     private void redirect()
@@ -49,6 +49,7 @@
             }
             else
             {
+                state.UserRoot = false;
                 nav.NavigateTo("/");
             }
             state.UserName = data.Item2;

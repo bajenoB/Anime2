@@ -3,13 +3,16 @@
 @using Anime.Model;
 @using Anime.Data;
 
+
+
  @if (cartItems == null || cartItems.Count <= 0)
     {
     <span>You have no items in your cart.</span>
 }
 else
 {
-    
+
+    <a class="button" @onclick="((args)=>BuyItems())">Buy all</a>
     <div class="main_products_cards">
     @foreach (var item in cartItems)
     {
@@ -19,7 +22,8 @@ else
                     <h3>@item.Name</h3>
                     <h4>@item.Description</h4>
                     <span class="price">@item.Price </span>
-                    <a class="button" @onclick="((args)=>DeleteItem(item))">Add to card</a>
+                    <a class="button" @onclick="((args)=>DeleteItem(item))">Delete from cart</a>
+                    
 
                    
                     
@@ -48,6 +52,16 @@ else
     {
         await CartService.DeleteItem(item);
         cartItems = await CartService.GetCartItems();
+    }
+
+    private async Task BuyItems()
+    {
+        @foreach (var item1 in cartItems)
+        {
+            await CartService.DeleteItem(item1);
+            cartItems = await CartService.GetCartItems();
+        }
+       
     }
 
     

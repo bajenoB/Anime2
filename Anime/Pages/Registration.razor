@@ -3,6 +3,7 @@
 
 @inject NavigationManager nav;
 @inject AppState state;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
 
 @page "/registration"
 
@@ -12,11 +13,11 @@
 
 <div class="container but">
     <label for="uname"><b>Логин</b></label>
-    <input @bind-value="login" type="text" placeholder="Введите логин" name="uname" required>
+    <input @bind-value="login" type="text" placeholder="Введите логин" name="uname" required minlength="3">
     
 
     <label for="psw"><b>Пароль</b></label>
-    <input @bind-value="password" type="password" placeholder="Введите пароль" name="psw" required>
+    <input @bind-value="password" type="password" placeholder="Введите пароль" name="psw" required minlength="5">
 
     <button @onclick="Reg" class="background_but">Зарегистрироваться</button>
 </div>
@@ -26,10 +27,14 @@
     private string login = string.Empty;
     private string password = string.Empty;
 
-    private void Reg()
+    private async void Reg()
     {
-        
-        DBservice.AddUser(login,password);
-        nav.NavigateTo("/authorisation/");
+        if(Validata.ExistUser(login)!=false&&Validata.SimpleValid(login)!=false&&Validata.SimpleValid(password)!=false&&Validata.SpaceValid(login)!=false&&Validata.SpaceValid(password)!=false&&login.Count()<20&&password.Count()<20)
+        {
+             await localStorage.SetItemAsync("client", login);
+             DBservice.AddUser(login,password);
+             nav.NavigateTo("/authorisation/");
+        }
+       
     }
 }
