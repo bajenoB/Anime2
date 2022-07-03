@@ -67,15 +67,24 @@ public static class DBservice
 
     
 
-    public static void DeleteCat(Categories cat)
+    public static void DeleteCat(int cat)
     {
         using (DBContext db = new DBContext())
         {
-            db.Categories.Remove(cat);
+            db.Categories.Remove(db.Categories.Where(x => x.Id == cat).First());
             db.SaveChanges();
-            
+
 
         }
+    }
+
+    public static bool IsCategoryInUse(int CategoryId)
+    {
+        using (DBContext db = new DBContext())
+        {
+            return db.Product.Any(x => x.Categoryid == CategoryId);
+        }
+
     }
 
     public static void AddUser(string login,string pass)

@@ -1,0 +1,67 @@
+﻿@using Anime.Model;
+@using Anime.Data;
+@using Microsoft.EntityFrameworkCore;
+
+@inject AppState state;
+@inject NavigationManager nav;
+
+@page "/deleteCat"
+
+@if (@state.UserRoot != false)
+{
+    
+
+    <div class="main_products_cards">
+        @foreach (var item in DBservice.category)
+        {
+                
+                    <div class="users-item">
+                        <h3>Name @item.Name</h3>
+                        <h3>Id @item.Id</h3>
+                        <button class="btn btn-danger" @onclick="@((args)=>removeitem(@item.Id))">Удалить</button>
+                    </div>
+        }
+    </div>
+}
+else
+{
+    <h1>fuck off </h1>
+}
+
+@code{
+
+    int prodeid = -1;
+    string searchQuery = string.Empty;
+    int id;
+    bool yes = false;
+    private void removeitem(int prod)
+    {
+        foreach(var item in DBservice.products)
+        {
+            if(item.Categoryid==prod)
+            {
+                yes = true;
+                break;
+            }
+            else
+            {
+                yes = false;
+            }
+        }
+
+        if(yes==false)
+        {
+            DBservice.DeleteCat(prod);
+            DBservice.GetDataFromDB();
+        }
+
+    }
+
+    
+
+    private void Reg()
+    {
+        //DBservice.AddUser(login, password);
+        nav.NavigateTo("/adminpanel/");
+    }
+}

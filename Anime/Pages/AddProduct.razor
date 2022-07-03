@@ -57,9 +57,9 @@ else
     private void AddCards()
     {
         uint N;
-        if (price != 0 && img != null && name != null && description != null && categoryid != 0&&price>0&&categoryid>0&&Validata.DigitValid(price)!=true&&Validata.DigitValid(categoryid)!=true&&Validata.SimpleValid(name)!=false&&Validata.SimpleValid(description)!=false)
+        if (price != 0 && img != null && name != null && description != null && categoryid != 0&&price>0&&Validata.SimpleValid(name)!=false&&Validata.SimpleValid(description)!=false)
         {
-            
+            //categoryid>0&&Validata.DigitValid(price)!=true&&Validata.DigitValid(categoryid)!=true&&
             DBservice.AddProduct(name, price, img, description, categoryid);
             DBservice.GetDataFromDB();
             price = 0; img = string.Empty; name = string.Empty; categoryid = DBservice.category.First().Id;

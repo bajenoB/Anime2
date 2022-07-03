@@ -73,5 +73,18 @@
             return true;
         }
 
+        public static Tuple<bool, string> CheckCategoryDelete(int CategoryId)
+        {
+            //if (!DbService.CheckCategoryExistence(CategoryId))
+            //    return Tuple.Create(false, "Category doesn't exist yet.");
+            if (!DBservice.category.Any(x => x.Id == CategoryId))
+                return Tuple.Create(false, "Category doesn't exist.");
+
+            if (DBservice.IsCategoryInUse(CategoryId))
+                return Tuple.Create(false, "Category in use.");
+
+            return Tuple.Create(true, "Category has been removed");
+        }
+
     }
 }
