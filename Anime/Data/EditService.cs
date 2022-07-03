@@ -4,6 +4,7 @@
     {
         public int id = 0; 
         public event Action OnChange;
+        public int selectedId = 0;
 
         public int Id
         {
@@ -13,6 +14,19 @@
                 if (id != value)
                 {
                     id = value;
+                    NotifyStateChanged1();
+                }
+            }
+        }
+
+        public int SelectedId
+        {
+            get { return selectedId; }
+            set
+            {
+                if (selectedId != value)
+                {
+                    selectedId = value;
                     NotifyStateChanged1();
                 }
             }
