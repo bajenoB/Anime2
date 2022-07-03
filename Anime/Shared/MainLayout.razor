@@ -40,9 +40,19 @@
                 }
 
                         <div class="auth">
+                    @if(@state.IsLoged!=true)
+                    {
                         <NavLink href="/authorisation">
                         <button class="atuin-btn">@state.UserName</button>
                         </NavLink>
+                    }
+                    else
+                    {
+                        <NavLink href="/logout">
+                        <button class="atuin-btn">@state.UserName</button>
+                        </NavLink>
+                    }
+                    
                         </div>
                         <div class="cart">
                     <NavLink href="/cart">

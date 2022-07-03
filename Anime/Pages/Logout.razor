@@ -1,0 +1,32 @@
+﻿@using Anime.Data;
+@using Anime.Model;
+
+@inject NavigationManager nav;
+@inject AppState state;
+@inject Blazored.LocalStorage.ILocalStorageService localStorage;
+
+@page "/logout"
+
+
+
+<PageTitle>Logout</PageTitle>
+
+<div class="container but">
+    <button @onclick="Reg" class="btn btn-danger">Выйти</button>
+</div>
+
+@code
+{
+    private string login = string.Empty;
+    private string password = string.Empty;
+
+    private async void Reg()
+    {
+        state.IsLoged = false;
+        state.UserRoot = false;
+        state.UserName = "Вход";
+        nav.NavigateTo("/");
+        
+       
+    }
+}

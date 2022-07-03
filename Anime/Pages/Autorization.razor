@@ -38,6 +38,7 @@
 
     private void Login()
     {
+        state.IsLoged = true;
         var data = DBservice.authadmin(login, password);
 
         if (data.Item2 != "Вход")
